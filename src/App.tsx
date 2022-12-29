@@ -1,5 +1,7 @@
+import PasswordGenerator from "./Components/PasswordGenerator";
+
 function App() {
-  return <div></div>;
+  return <PasswordGenerator />;
 }
 
 export default App;
