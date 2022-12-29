@@ -161,7 +161,8 @@ body {
 .password__slider_value {
   font-size: 2rem;
   font-weight: var(--fw-bold);
-  margin-left: 1rem;
+  width: 3.125rem;
+  text-align: right;
 }
 
 .password__option > input {

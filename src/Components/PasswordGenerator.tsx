@@ -19,10 +19,16 @@ export default function PasswordGenerator() {
     <div className="password flow">
       <h1 className="password__title ">Password Generator</h1>
       <Password password={password} />
-      <LengthSlider />
+      <LengthSlider passwordLength={passwordLength} setPasswordLength={setPasswordLength} />
       <Options />
       <Strength />
-      <Button />
+      <Button
+        setPassword={setPassword}
+        useUpperLetters={useUpperLetters}
+        useNumbers={useNumbers}
+        useSymbols={useSymbols}
+        passwordLength={passwordLength}
+      />
     </div>
   );
 }
