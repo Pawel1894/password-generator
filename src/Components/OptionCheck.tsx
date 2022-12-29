@@ -16,7 +16,7 @@ export default function OptionCheck({ label, value, dispatchOptions, type }: Pro
 
   return (
     <label className="password__option pointer flex-center">
-      <input className="pointer" type="checkbox" checked={value} onClick={onValueChangeHandler} />
+      <input className="pointer" type="checkbox" checked={value} onChange={onValueChangeHandler} />
       <span className="text-white">{label}</span>
     </label>
   );

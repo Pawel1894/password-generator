@@ -1,4 +1,4 @@
-import { PasswordSets } from "../Types";
+import { OptionsState, PasswordSets, StrengthIndicator } from "../Types";
 
 const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
 const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,11 +38,10 @@ export function GeneratePassword(
   if (useSymbols) charset.symbols = symbols;
 
   for (const property in charset) {
-    if (property in charset)
-      if (property in charset) {
-        allCharacters += charset[property];
-        password.push(getRandomCharacter(charset[property]));
-      }
+    if (property in charset) {
+      allCharacters += charset[property];
+      password.push(getRandomCharacter(charset[property]));
+    }
   }
 
   for (let index = Object.keys(charset).length; index < length; index++) {
@@ -51,4 +50,32 @@ export function GeneratePassword(
 
   const result = shuffleArray(password).join("");
   return result;
+}
+
+function checkNumberOfUsedOptions(options: OptionsState) {
+  let userOptions = 0;
+  if (options.useNumbers) userOptions++;
+  if (options.useSymbols) userOptions++;
+  if (options.useUpperLetters) userOptions++;
+
+  return userOptions;
+}
+
+export function PasswordStrengthCalculator(options: OptionsState, passwordLength: number): StrengthIndicator {
+  const numberOfUsedOptions = checkNumberOfUsedOptions(options);
+
+  if (passwordLength <= 16 && passwordLength > 13 && numberOfUsedOptions === 0) return "average";
+
+  if (passwordLength <= 13 && passwordLength > 10 && (numberOfUsedOptions === 1 || numberOfUsedOptions === 2))
+    return "average";
+
+  if (passwordLength <= 12 && passwordLength > 9 && numberOfUsedOptions === 3) return "average";
+
+  if (passwordLength > 16) return "strong";
+
+  if (passwordLength > 13 && (numberOfUsedOptions === 1 || numberOfUsedOptions === 2)) return "strong";
+
+  if (passwordLength > 12 && numberOfUsedOptions === 3) return "strong";
+
+  return "weak";
 }

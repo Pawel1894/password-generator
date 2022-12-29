@@ -1,7 +1,7 @@
 import React, { useMemo, useReducer, useState } from "react";
 import { OPTION_TYPES } from "../Enums";
-import { GeneratePassword } from "../Helpers/helper";
-import { OptionsAction, OptionsState } from "../Types";
+import { GeneratePassword, PasswordStrengthCalculator } from "../Helpers/helper";
+import { OptionsAction, OptionsState, StrengthIndicator } from "../Types";
 import Button from "./Button";
 import LengthSlider from "./LengthSlider";
 import Options from "./Options";
@@ -9,9 +9,9 @@ import Password from "./Password";
 import Strength from "./Strength";
 
 const initialState: OptionsState = {
-  useUpperLetters: false,
-  useNumbers: false,
-  useSymbols: false,
+  useUpperLetters: true,
+  useNumbers: true,
+  useSymbols: true,
 };
 
 function optionsReducer(state: OptionsState, action: OptionsAction) {
@@ -29,9 +29,14 @@ function optionsReducer(state: OptionsState, action: OptionsAction) {
 
 export default function PasswordGenerator() {
   const [options, dispatchOptions] = useReducer(optionsReducer, initialState);
-  const [passwordLength, setPasswordLength] = useState<number>(10);
+  const [passwordLength, setPasswordLength] = useState<number>(13);
   const [password, setPassword] = useState(() =>
     GeneratePassword(options.useUpperLetters, options.useNumbers, options.useSymbols, passwordLength)
+  );
+
+  const strength: StrengthIndicator = useMemo(
+    () => PasswordStrengthCalculator(options, passwordLength),
+    [options, passwordLength]
   );
 
   return (
@@ -40,7 +45,7 @@ export default function PasswordGenerator() {
       <Password password={password} />
       <LengthSlider passwordLength={passwordLength} setPasswordLength={setPasswordLength} />
       <Options options={options} dispatchOptions={dispatchOptions} />
-      <Strength />
+      <Strength strength={strength} />
       <Button
         setPassword={setPassword}
         useUpperLetters={options.useUpperLetters}

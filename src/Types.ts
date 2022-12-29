@@ -15,3 +15,5 @@ export type PasswordSets = {
   lowerLetters: string;
   [key: string]: string;
 };
+
+export type StrengthIndicator = "weak" | "average" | "strong";
