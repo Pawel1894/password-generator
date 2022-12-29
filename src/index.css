@@ -37,7 +37,7 @@ body {
 }
 
 .flow > * + * {
-  margin-top: var(--flow-gap, 2.5rem);
+  margin-top: var(--flow-gap, 3rem);
 }
 
 .text-accent-100 {
