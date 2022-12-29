@@ -96,7 +96,7 @@ body {
 .password__title {
   font-size: 2.5rem;
   font-weight: var(--fw-bold);
-  margin-bottom: 3rem;
+  margin-bottom: 0.5rem;
   line-height: 1.1;
 }
 
