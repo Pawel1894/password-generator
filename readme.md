@@ -21,8 +21,8 @@ I created my strength indicators based on this [Hive Systems Blog written by Cor
 
 ### Password strength conditions
 
-####length = length of password
-####options = include numbers, upper letters, symbols
+#### length = length of password
+#### options = include numbers, upper letters, symbols
 
 - length <= 16 && length > 13 with none of options selected is average
 - length <= 13 && length > 10 with 1 or 2 options selected is average
