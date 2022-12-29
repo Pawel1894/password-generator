@@ -7,6 +7,7 @@ This is password generator app created using [React](https://reactjs.org/), and 
 - [Overview](#overview)
   - [Motivation](#motivation)
   - [Password strength conditions](#password-strength-conditions)
+  - [Preview](#preview)
   - [Website](#website)
 - [Built with](#built-with)  
 - [Install process](#install-process)
@@ -34,6 +35,11 @@ I created my strength indicators based on this [Hive Systems Blog written by Cor
 - length > 12 with 3 options is strong
 
 #### if none of these conditions is true then password is defined as weak
+
+### Preview
+![obraz](https://user-images.githubusercontent.com/45789222/210012816-6a32e478-84d6-4da4-b491-967add9a7055.png)
+![obraz](https://user-images.githubusercontent.com/45789222/210013011-36f12859-742d-4b26-8e8b-7248f978d6c9.png)
+
 
 ### Website
 
