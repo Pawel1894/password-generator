@@ -9,7 +9,7 @@ export default function Strength({ strength }: Props) {
   return (
     <div className="password__strength bg-accent-300">
       <span className="password__strength-title text-white ">Strength</span>
-      <span data-strength-level="weak" className="password__strength-indicator">
+      <span data-strength-level={strength} className="password__strength-indicator">
         {strength}
       </span>
     </div>

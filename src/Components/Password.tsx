@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { isMobile } from "../Helpers/helper";
 
 type Props = {
   password: string;
@@ -6,34 +7,47 @@ type Props = {
 
 export default function Password({ password }: Props) {
   const [copied, setCopied] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [mousePos, setmousePos] = useState({
     x: 0,
     y: 0,
   });
 
-  function copyPasswordToClipboard(e: React.MouseEvent<HTMLDivElement>) {
-    var rect = e.currentTarget.getBoundingClientRect();
+  function copyPasswordToClipboard(e: React.MouseEvent) {
+    if (isMobile.any()) {
+      passwordRef.current?.select();
+      passwordRef.current?.setSelectionRange(0, 99999);
+    } else {
+      var rect = e.currentTarget.getBoundingClientRect();
 
-    setmousePos({
-      x: e.clientX - rect.left - 40,
-      y: e.clientY - rect.top - 40,
-    });
-    navigator.clipboard.writeText(password);
-    setCopied(true);
+      setmousePos({
+        x: e.clientX - rect.left - 40,
+        y: e.clientY - rect.top - 50,
+      });
 
-    setTimeout(() => {
-      setCopied(false);
-    }, 350);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 350);
+
+      navigator.clipboard.writeText(passwordRef.current?.value!);
+    }
   }
 
   return (
-    <div className="pointer relative" onClick={copyPasswordToClipboard}>
+    <button className="password__input relative pointer" onClick={copyPasswordToClipboard}>
       {copied ? (
         <div style={{ top: mousePos.y, left: mousePos.x }} className="password_copy-alert">
           Copied
         </div>
       ) : null}
-      <span className="password__input text-accent-400">{password}</span>
-    </div>
+      <input
+        readOnly={true}
+        ref={passwordRef}
+        className="text-accent-400 bg-accent-200 pointer"
+        value={password}
+      />
+    </button>
   );
 }
