@@ -45,7 +45,7 @@ export default function Password({ password }: Props) {
       <input
         readOnly={true}
         ref={passwordRef}
-        className="text-accent-400 bg-accent-200 pointer"
+        className="text-white bg-accent-200 pointer"
         value={password}
       />
     </button>
