@@ -32,6 +32,10 @@ body {
   align-items: center;
 }
 
+.relative {
+  position: relative;
+}
+
 .flow > * + * {
   margin-top: var(--flow-gap, 2.5rem);
 }
@@ -102,15 +106,22 @@ body {
 }
 
 .password__input {
-  box-sizing: border-box;
-  outline: unset;
+  display: inline-block;
   background-color: transparent;
   padding: 0.5rem 1rem;
   font-size: 1.4rem;
   width: 100%;
   border: 0.125rem solid rgb(var(--clr-accent-400));
-  height: 3.125rem;
   color: #ffffff;
+  pointer-events: none;
+}
+
+.password_copy-alert {
+  position: absolute;
+  display: block;
+  background-color: rgb(var(--clr-accent-300));
+  padding: 0.5rem;
+  color: #fff;
 }
 
 .password__slider {
@@ -188,8 +199,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-
-  height: 3.125rem;
 }
 
 .password__strength-indicator {
@@ -216,5 +225,4 @@ body {
   margin-left: auto;
   width: 100%;
   font-size: 1.4rem;
-  height: 3.125rem;
 }
